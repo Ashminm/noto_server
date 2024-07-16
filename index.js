@@ -2,10 +2,12 @@ require('dotenv').config()
 const express=require('express')
 const cors=require('cors')
 require('./Connection/db')
+const router=require('./routes/route')
 
 const noto=express()
 noto.use(cors())
 noto.use(express.json())
+noto.use(router)
 
 const PORT=3000 || process.env.PORT
 
