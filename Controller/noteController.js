@@ -16,3 +16,21 @@ exports.addNote=async(req,res)=>{
         res.status(401).json('Something went wrong:'+err)
     }
 }
+
+exports.getAllNotes=async(req,res)=>{
+    try{
+        const Allnotes=await notes.find()
+        res.status(200).json(Allnotes)
+    }catch(err){
+        res.status(401).json("Somthing went wrong:"+err)
+    }
+}
+
+exports.getSingleNote=async(req,res)=>{
+    try{
+        const Result=await notes.findOne({_id:req.params.id})
+        res.status(200).json(Result)
+    }catch(err){
+        res.status(401).json(err)
+    }
+}
