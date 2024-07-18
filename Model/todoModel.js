@@ -1,11 +1,9 @@
 const mongoose=require('mongoose')
 
-const noteSchema=new mongoose.Schema({
+const todoSchema=new mongoose.Schema({
     title:{
         type:String,
-    },
-    body:{
-        type:String,
+        required:true
     },
     category:{
         type:String,
@@ -18,5 +16,5 @@ const noteSchema=new mongoose.Schema({
     }
 })
 
-const notes=mongoose.model('notes',noteSchema)
-module.exports=notes
+const todos=mongoose.model('todos',todoSchema)
+module.exports=todos
