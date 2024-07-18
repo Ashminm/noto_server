@@ -25,3 +25,13 @@ exports.getAllTodo=async(req,res)=>{
         res.status(401).json(err)
     }
 }
+
+exports.getSingleTodo=async(req,res)=>{
+    try{
+        const Result=await todos.findOne({_id:req.params.id})
+        console.log(_id);
+        res.status(200).json(Result)
+    }catch(err){
+        res.status(401).json(err)
+    }
+}
