@@ -34,3 +34,24 @@ exports.getSingleNote=async(req,res)=>{
         res.status(401).json(err)
     }
 }
+
+exports.deleteNote=async(req,res)=>{
+    try{
+        const NId= req.params.id
+        const Result= await notes.findOneAndDelete({_id:NId})
+        res.status(200).json(Result)
+    }catch(err){
+        res.status(401).json(err)
+    }
+}
+
+exports.EditNote=async(req,res)=>{
+        const Nid=req.params.id
+        const {title,body}=req.body
+    try{
+        const Result=await notes.findByIdAndUpdate({_id:Nid},{title,body})
+        res.status(200).json(Result)
+    }catch(err){
+        res.status(401).json(err)
+    }
+}

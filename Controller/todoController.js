@@ -35,3 +35,24 @@ exports.getSingleTodo=async(req,res)=>{
         res.status(401).json(err)
     }
 }
+
+exports.Deletetodo=async(req,res)=>{
+    try{
+        const Tid=req.params.id
+        const Result=await todos.findOneAndDelete({_id:Tid})
+        res.status(200).json(Result)
+    }catch(err){
+        res.status(401).json(err)
+    }
+}
+
+exports.EditTodo=async(req,res)=>{
+    const Tid=req.params.id
+    const {title}=req.body
+    try{
+        const Result=await todos.findByIdAndUpdate({_id:Tid},{title})
+        res.status(200).json(Result)
+    }catch(err){
+        res.status(401).json(err)
+    }
+}
