@@ -49,9 +49,15 @@ exports.Deletetodo=async(req,res)=>{
 exports.EditTodo=async(req,res)=>{
     const Tid=req.params.id
     const {title}=req.body
+    const date=Date.now()
     try{
-        const Result=await todos.findByIdAndUpdate({_id:Tid},{title})
-        res.status(200).json(Result)
+        const existingTodo=await todos.findOne({title})
+        if(existingTodo){
+            res.status(406).json("Already Exist the Task!!")
+        }else{
+            const Result=await todos.findByIdAndUpdate({_id:Tid},{title,date})
+            res.status(200).json(Result)
+        }
     }catch(err){
         res.status(401).json(err)
     }

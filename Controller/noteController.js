@@ -48,9 +48,16 @@ exports.deleteNote=async(req,res)=>{
 exports.EditNote=async(req,res)=>{
         const Nid=req.params.id
         const {title,body}=req.body
+        const date=Date.now()
     try{
-        const Result=await notes.findByIdAndUpdate({_id:Nid},{title,body})
-        res.status(200).json(Result)
+        const existingNote=await notes.findOne({body})
+        if(existingNote){
+            res.status(406).json("Already Exist")
+        }else{
+            const Result=await notes.findByIdAndUpdate({_id:Nid},{title,body,date})
+            res.status(200).json(Result)
+        }
+        
     }catch(err){
         res.status(401).json(err)
     }
