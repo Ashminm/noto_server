@@ -5,4 +5,5 @@ mongoose.connect(connectionString).then((res)=>{
     console.log("Connection Established.(Atles)!!");
 }).catch((err)=>{
     console.log(err);
+    console.log("Internet Connection Faild. Your Offline!!");
 })
