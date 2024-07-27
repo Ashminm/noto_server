@@ -1,5 +1,6 @@
 const notes=require('../Model/noteModel')
 
+
 exports.addNote=async(req,res)=>{
     const {title,body}=req.body
     const cate="Recent"
