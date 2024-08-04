@@ -51,7 +51,7 @@ exports.EditNote=async(req,res)=>{
         const {title,body}=req.body
         const date=Date.now()
     try{
-        const existingNote=await notes.findOne({body})
+        const existingNote=await notes.findOne({title,body})
         if(existingNote){
             res.status(406).json("Already Exist")
         }else{
