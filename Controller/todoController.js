@@ -1,6 +1,5 @@
 const todos=require('../Model/todoModel')
 
-
 exports.addTodo=async(req,res)=>{
     const {title}=req.body
     const cat="New"

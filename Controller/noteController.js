@@ -1,5 +1,5 @@
 const notes=require('../Model/noteModel')
-
+const todos=require('../Model/todoModel')
 
 exports.addNote=async(req,res)=>{
     const {title,body}=req.body
@@ -62,4 +62,38 @@ exports.EditNote=async(req,res)=>{
     }catch(err){
         res.status(401).json(err)
     }
+}
+
+exports.recoverTask=async(req,res)=>{
+    // const {title, category, date}=req.body
+    // try{
+    //     const hasBodyField = 'body' in notes.schema.paths;
+    //     if(hasBodyField){
+    //         const { body } = req.body;
+    //          const existingNote= await notes.findOne({title,body})
+    //              if(existingNote){
+    //                 res.status(406).json("Exising Note!!")
+    //              } else{
+    //                 newNote=new notes({title,body,category,date})
+    //                 await newNote.save();
+    //                 res.status(200).json(newNote)
+    //                 console.log("Note Added"); 
+
+    //              }
+    //     }else{
+
+    //         const existingTodo=await todos.findOne({title})
+    //             if(existingTodo){
+    //                 res.status(406).json("Existing todo!!")
+    //             }else{
+    //                 const newTodo=new todos({title,category,date})
+    //                 await newTodo.save()
+    //                 res.status(200).json(newTodo)
+    //                 console.log("Todo Added");
+
+    //             }
+    //     }
+    // }catch(err){
+    //     res.status(500).json(err)
+    // }
 }
