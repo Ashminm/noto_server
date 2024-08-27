@@ -3,6 +3,7 @@ const express=require('express')
 const noteController=require('../Controller/noteController')
 const todoController=require('../Controller/todoController')
 const trashController=require('../Controller/trashController')
+const archiveController=require('../Controller/archiveController')
 
 const router=new express.Router()
 
@@ -25,6 +26,8 @@ router.post('/add-trash-all',trashController.addTrash)
 router.get('/get-trash-all',trashController.getTrash)
 router.delete('/delete-trash/:id',trashController.deleteTrash)
 router.delete('/empty-trash',trashController.emptyTrash)
+
+router.post('/add-archive/:id',archiveController.addArchive)
 
 
 module.exports=router
