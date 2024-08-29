@@ -1,5 +1,7 @@
 const notes=require('../Model/noteModel')
 const todos=require('../Model/todoModel')
+const archives=require('../Model/archiveModel')
+
 
 exports.addNote=async(req,res)=>{
     const {title,body}=req.body
@@ -62,6 +64,29 @@ exports.EditNote=async(req,res)=>{
     }catch(err){
         res.status(401).json(err)
     }
+}
+
+exports.recoverArchive=async(req,res)=>{
+    const{title,body,category,date}=req.body
+    const Nid=req.params.id
+    try{
+        const existingNote=await notes.findOne({title,body,category})
+        if(existingNote){
+            res.status(406).json("Already in your not pade!")
+        }else{
+            const newNote=new notes({title, body, category, date})
+            await newNote.save()
+            const result= await archives.findOneAndDelete({_id:Nid})
+            if(result){
+                res.status(200).json({newNote,result})
+            }else{
+                return res.status(404).json("Archive not found for deletion");
+            }
+        }
+    }catch(err){
+        res.status(401).json(err)
+    }
+
 }
 
 exports.recoverTask=async(req,res)=>{
