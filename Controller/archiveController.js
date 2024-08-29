@@ -40,3 +40,22 @@ exports.getSingleArchive=async(req,res)=>{
         res.status(401).json(err)
     }
 }
+
+exports.deleteArchive=async(req,res)=>{
+    try{
+        const Aid=req.params.id
+        const result= await archives.findOneAndDelete({_id:Aid})
+        res.status(200).json(result)
+    } catch(err){
+        res.status(401).json(err)
+    }  
+}
+
+exports.emptyArchive=async(req,res)=>{
+    try{
+        const result=await archives.deleteMany()
+        res.status(200).json(result)
+    }catch(err){
+        res.status(401).json(err)
+    }
+}

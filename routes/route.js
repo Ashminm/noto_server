@@ -31,5 +31,7 @@ router.delete('/empty-trash',trashController.emptyTrash)
 router.post('/add-archive/:id',archiveController.addArchive)
 router.get('/get-archive',archiveController.getArchive)
 router.get('/single-archive/:id',archiveController.getSingleArchive)
+router.delete('/delete-archive/:id',archiveController.deleteArchive)
+router.delete('/empty-archive',archiveController.emptyArchive)
 
 module.exports=router
