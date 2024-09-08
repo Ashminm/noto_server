@@ -6,6 +6,7 @@ const trashSchema=new mongoose.Schema({
     },
     body:{
         type:String,
+        // required:true
     },
     category:{
         type:String,

@@ -2,6 +2,7 @@ const trashs=require('../Model/trashModel')
 
 exports.addTrash=async(req,res)=>{
     const{title,body,category}=req.body
+    // const cate="Trash"
     try{
         const newTrash=new trashs({title,body,category,date:Date.now()})
         await newTrash.save()

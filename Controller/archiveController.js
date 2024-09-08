@@ -4,6 +4,7 @@ const notes=require('../Model/noteModel')
 exports.addArchive=async(req,res)=>{
     const{title,body,category,date}=req.body
     const Aid=req.params.id
+    // cate= "Archive"
     try{
         const existingArchive=await archives.findOne({title,body,category})
         if(existingArchive){

@@ -4,6 +4,10 @@ const noteController=require('../Controller/noteController')
 const todoController=require('../Controller/todoController')
 const trashController=require('../Controller/trashController')
 const archiveController=require('../Controller/archiveController')
+const privetController=require('../Controller/privetController')
+const privetNoteController=require('../Controller/privetNoteModelController')
+
+const JwtMidd=require('../Middilewares/jwtMiddileware')
 
 const router=new express.Router()
 
@@ -33,5 +37,12 @@ router.get('/get-archive',archiveController.getArchive)
 router.get('/single-archive/:id',archiveController.getSingleArchive)
 router.delete('/delete-archive/:id',archiveController.deleteArchive)
 router.delete('/empty-archive',archiveController.emptyArchive)
+
+router.post('/create-passcode',privetController.createPasscode)
+router.post('/check-passcode',privetController.checkPasscode)
+router.put('/forgot-passcode',privetController.forgotPasscode)
+
+router.post('/add-to-privet/:id',JwtMidd,privetNoteController.addtoPrivet)
+router.get('/get-privet-notes',JwtMidd,privetNoteController.getPrivetNotes)
 
 module.exports=router
