@@ -89,28 +89,6 @@ exports.recoverArchive=async(req,res)=>{
 
 }
 
-// exports.addtoPrivet=async(req,res)=>{
-//     const{date,title,body,category}=req.body
-//     const Pid=req.params.id
-//     try{
-//         const existingNote=await privets.findOne({title,body,category})
-//         if(existingNote){
-//             res.status(406).json("Already exist the note!!")
-//         }else{
-//             const newNote=new privets({date,title,body,category})
-//             await newNote.save()
-//             const result=await notes.findOneAndDelete({_id:Pid})
-//             if(result){
-//                 res.status(200).json({newNote,result})
-//             }else{
-//                 return res.status(404).json("Note not found for deletion")
-//             }
-//         }
-//     }catch(err){
-//         res.status(401).json(err)
-//     }
-// }
-
 exports.recoverTask=async(req,res)=>{
     // const {title, category, date}=req.body
     // try{

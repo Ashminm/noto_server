@@ -44,5 +44,8 @@ router.put('/forgot-passcode',privetController.forgotPasscode)
 
 router.post('/add-to-privet/:id',JwtMidd,privetNoteController.addtoPrivet)
 router.get('/get-privet-notes',JwtMidd,privetNoteController.getPrivetNotes)
+router.post('/unPrivet-note/:id',JwtMidd,privetNoteController.unPrivet)
+router.delete('/dete-privet/:id',JwtMidd,privetNoteController.deletePrivetNote)
+router.delete('/empty-privet',JwtMidd,privetNoteController.EmptyPrivet)
 
 module.exports=router
