@@ -51,15 +51,24 @@ exports.deleteNote=async(req,res)=>{
 exports.EditNote=async(req,res)=>{
         const Nid=req.params.id
         const {title,body}=req.body
+        
         const date=Date.now()
     try{
-        const existingNote=await notes.findOne({title,body})
-        if(existingNote){
-            res.status(406).json("Already Exist")
-        }else{
-            const Result=await notes.findByIdAndUpdate({_id:Nid},{title,body,date})
-            res.status(200).json(Result)
+        if (!title || title.trim().length === 0 || !body || body.trim().length === 0 ) {
+            return res.status(400).json("Title must contain at least one character.");
+            
         }
+        if (!body || body.trim().length === 0) {
+            return res.status(400).json("Body must contain at least one character.");
+        }
+            const existingNote=await notes.findOne({title,body})
+            if(existingNote){
+                res.status(406).json("Already Exist")
+            }else{
+                const Result=await notes.findByIdAndUpdate({_id:Nid},{title,body,date})
+                res.status(200).json(Result)
+            }
+            
         
     }catch(err){
         res.status(401).json(err)
