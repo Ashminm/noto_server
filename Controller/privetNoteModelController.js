@@ -63,11 +63,13 @@ exports.unPrivet=async(req,res)=>{
 
 exports.deletePrivetNote=async(req,res)=>{
     try{
-        const PId=rq.params.id
+        const PId=req.params.id
         const result = await privetNotes.findByIdAndDelete({_id:PId})
         res.status(200).json(result)
     }catch(err){
         res.status(401).json(err)
+        console.log(err);
+        
     }
 }
 
@@ -80,4 +82,23 @@ exports.EmptyPrivet=async(req,res)=>{
     }catch(err){
         res.status(401).json(err)
     }
+}
+
+exports.NewAddPrivetNote=async(req,res)=>{
+    const {title,body}=req.body
+    const userId=req.payload
+    const cate="Privet"
+    try{
+        const existingNote=await privetNotes.findOne({title,body,userId})
+        if(existingNote){
+            res.status(406).json("Existing privet note")
+        }else{
+            const newPrivet=new privetNotes({title,body,category:cate,date:Date.now(),userId})
+            await newPrivet.save()
+            res.status(200).json(newPrivet)
+        }
+    }catch(err){
+        res.status(500).json("Somthing went wrong"+err)
+    }
+
 }

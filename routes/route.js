@@ -47,5 +47,6 @@ router.get('/get-privet-notes',JwtMidd,privetNoteController.getPrivetNotes)
 router.post('/unPrivet-note/:id',JwtMidd,privetNoteController.unPrivet)
 router.delete('/dete-privet/:id',JwtMidd,privetNoteController.deletePrivetNote)
 router.delete('/empty-privet',JwtMidd,privetNoteController.EmptyPrivet)
+router.post('/new-privet-note',JwtMidd,privetNoteController.NewAddPrivetNote)
 
 module.exports=router

@@ -52,7 +52,8 @@ exports.forgotPasscode = async (req, res) => {
             const oldPasscodeDigit = await privets.findOne({passcode1: newPasscode1, 
                 passcode2: newPasscode2, 
                 passcode3: newPasscode3, 
-                passcode4: newPasscode4 
+                passcode4: newPasscode4,
+                email
             })
             // console.log("OldDidit:",oldPasscodeDigit);
             
