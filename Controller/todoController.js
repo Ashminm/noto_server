@@ -51,13 +51,20 @@ exports.EditTodo=async(req,res)=>{
     const {title}=req.body
     const date=Date.now()
     try{
-        const existingTodo=await todos.findOne({title})
-        if(existingTodo){
-            res.status(406).json("Already Exist the Task!!")
+        if (!title || title.trim().length === 0) {
+            return res.status(400).json("Title must contain at least one character.");
+            
         }else{
-            const Result=await todos.findByIdAndUpdate({_id:Tid},{title,date})
-            res.status(200).json(Result)
+            const existingTodo=await todos.findOne({title})
+            if(existingTodo){
+                res.status(406).json(`${existingTodo.title} Already in your task`)
+            }else{
+                const Result=await todos.findByIdAndUpdate({_id:Tid},{title,date})
+                res.status(200).json(Result)
+            }
         }
+
+        
     }catch(err){
         res.status(401).json(err)
     }
