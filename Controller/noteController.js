@@ -1,6 +1,7 @@
 const notes=require('../Model/noteModel')
 const todos=require('../Model/todoModel')
 const archives=require('../Model/archiveModel')
+const { model } = require('mongoose')
 
 
 exports.addNote=async(req,res)=>{
@@ -99,35 +100,35 @@ exports.recoverArchive=async(req,res)=>{
 }
 
 exports.recoverTask=async(req,res)=>{
-    // const {title, category, date}=req.body
-    // try{
-    //     const hasBodyField = 'body' in notes.schema.paths;
-    //     if(hasBodyField){
-    //         const { body } = req.body;
-    //          const existingNote= await notes.findOne({title,body})
-    //              if(existingNote){
-    //                 res.status(406).json("Exising Note!!")
-    //              } else{
-    //                 newNote=new notes({title,body,category,date})
-    //                 await newNote.save();
-    //                 res.status(200).json(newNote)
-    //                 console.log("Note Added"); 
+    const {title, category, date}=req.body
+    try{
+        const Key = model.findOne(({body:'body'}));
+        if(Key){
+            const { body } = req.body;
+             const existingNote= await notes.findOne({title,body})
+                 if(existingNote){
+                    res.status(406).json("Exising Note!!")
+                 } else{
+                    newNote=new notes({title,body,category,date})
+                    await newNote.save();
+                    res.status(200).json(newNote)
+                    console.log("Note Added"); 
 
-    //              }
-    //     }else{
+                 }
+        }else{
 
-    //         const existingTodo=await todos.findOne({title})
-    //             if(existingTodo){
-    //                 res.status(406).json("Existing todo!!")
-    //             }else{
-    //                 const newTodo=new todos({title,category,date})
-    //                 await newTodo.save()
-    //                 res.status(200).json(newTodo)
-    //                 console.log("Todo Added");
+            const existingTodo=await todos.findOne({title})
+                if(existingTodo){
+                    res.status(406).json("Existing todo!!")
+                }else{
+                    const newTodo=new todos({title,category,date})
+                    await newTodo.save()
+                    res.status(200).json(newTodo)
+                    console.log("Todo Added");
 
-    //             }
-    //     }
-    // }catch(err){
-    //     res.status(500).json(err)
-    // }
+                }
+        }
+    }catch(err){
+        res.status(500).json(err)
+    }
 }
