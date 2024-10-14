@@ -4,7 +4,6 @@ const archives=require('../Model/archiveModel')
 const { model } = require('mongoose')
 const trashs=require('../Model/trashModel')
 
-
 exports.addNote=async(req,res)=>{
     const {title,body}=req.body
     const cate="All Notes"
@@ -70,8 +69,6 @@ exports.EditNote=async(req,res)=>{
                 const Result=await notes.findByIdAndUpdate({_id:Nid},{title,body,date})
                 res.status(200).json(Result)
             }
-            
-        
     }catch(err){
         res.status(401).json(err)
     }
